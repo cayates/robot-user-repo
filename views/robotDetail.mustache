@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="../singlerobot.css"/>
+{{>_head}}
+    </head>
+  <body>
+<div class = "robotFlex">
+      <div class = "imageAndName">
+        {{>_robot}}
+      </div>
+      <div class = "moreRobotInfo">
+        {{address.city}}, {{address.country}}
+        {{email}}
+        {{phone}}
+      </div>
+      <div class = "text1">
+        {{#university}}
+        <h3>Education:<p>{{university}}</p></h3>
+        {{/university}}
+      </div>
+      <div class = "robotList">
+        <ul>
+          <h3>Skills: </h3>
+          <li>{{skills}}</li>
+        </ul>
+      </div>
+</div>
+      <div>
+        <form class = "deleteRobotForm" action="/robots" method="POST">          
+            <input type="submit" name="_id" value="Delete Robot"> 
+        </form>      
+        <form class = "editRobotForm" action="/editrobot/{{id}}">  
+            <input type="submit" name="_id" value="Edit Robot">   
+        </form> 
+      </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<head>
+    <link rel="stylesheet" href="./styles.css"/>
+</head>
+
+<article class="robotProfile">
+  <img class="pic" src="{{avatar}}" alt="{{name}}">
+    <div class = "text">
+    <h3>{{name}}</h3>
+    <p>{{job}}</p>
+    <p>{{company}}</p>
+    {{^company}}<span class = "unemployed">Available for hire</span>{{/company}}
+    </div>
+</article>

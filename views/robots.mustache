@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./styles.css"/>
+    </head>
+    <body>
+    <h1>Brobots for Hire</h1>
+        <a href = "http://localhost:3000/login">Log in</a>     
+    <div class="robotCards">         
+        {{#robots}}  
+        <a href = "http://localhost:3000/_robot/{{id}}">                                               
+        {{>_robot}}
+        {{/robots}}
+    </div>
+        </a>    
+    </body>
+</html>

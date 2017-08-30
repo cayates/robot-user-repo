@@ -1,0 +1,58 @@
+DAL
+
+-const robotsData = require('./data');
+ -const robotInfo = robotsData.users;
+
+ -function getRobots () {
+ -  return robotInfo
+
+ -function getRobot (robotId) {
+ -    let chosenRobot = {}
+ -    for (let i = 0; i < robotInfo.length; i++) {
+ -      if (robotInfo[i].id == robotId) {
+ -        chosenRobot = robotInfo[i]
+ -      }
+ -      console.log(chosenRobot);
+ -    }
+ -    return chosenRobot
+ -  }
+
+ -module.exports = {
+ -    getRobot: getRobot,
+ -    getRobots: getRobots
+ -  }
+
+ SERVER
+
+  const express = require('express');
+  const mustacheExpress = require('mustache-express');
+  const app = express();
+ -const robotsData = require('./data');
+ -const robotInfo = robotsData.users;
+  const robotDal = require('./dal')
+
+  -app.get('/robots', function (request, response) {
+ -    const robots = robotDal.getRobots()
+ -    response.render('robots', { robots: robots })
+ -  })
+
+ -  app.get('/_robot/:id', function (request, response) {
+ -    const chosenRobot = robotDal.getRobot(request.params.id)
+
+      if (chosenRobot) {
+ -      response.render('robotDetail', chosenRobot)
+
+      } else {
+ -      response.send('NO ROBOTS!!!')
+
+      }
+      console.log(chosenRobot);
+    })
+  
+  app.set('port', 3000);
+  
+  app.listen(3000, function(){
+ -    console.log('Express started successfully.');
+ -})
+ -
+ -console.log(robotsData.users);

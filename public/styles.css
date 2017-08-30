@@ -1,0 +1,19 @@
+body {
+    background-color: peachpuff;
+    margin: 5%;
+    text-align: center;
+}
+.robotProfile {
+    width: 23.5%;
+    border-style: groove;
+    margin: 5px;
+}
+.unemployed {
+    color: red;
+}
+a {
+    width: 100%;
+}
+.robotCards {
+
+}

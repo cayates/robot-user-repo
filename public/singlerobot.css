@@ -1,0 +1,46 @@
+body {
+    background-color: peachpuff;
+    margin-top: 25px;
+}
+.robotProfile {
+    display: flex;
+    justify-content: center;
+}
+.text {
+    font-size: 40px;
+    padding-left: 30px;
+}
+.pic {
+    border-style: solid;
+    border-radius: 50%;
+    width: 250px;
+}
+.text1 {
+    display: flex;
+}
+h3 {
+    display: flex;
+    justify-content: center; 
+}
+p {
+    margin-top: 0;
+    font-weight: 100;
+    padding-left: 20px;
+}
+.unemployed {
+    color: red;
+}
+li {
+    list-style: none;
+}
+ul {
+    margin-top: 0;
+    font-size: 35px;
+}
+.robotList {
+    display: flex;
+    justify-content: center;
+}
+.moreRobotInfo {
+    
+}
