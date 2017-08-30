@@ -1,13 +1,20 @@
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017/robotdb'
+const Robots = require('./model')
+// mongoose.Promise = require('bluebird')
+const mongoose = require('mongoose')
 let robots = [];
+
+mongoose.connect('mongodb://localhost:27017/robotdb', {
+  useMongoClient: true
+})
+
 
 function getAllDocs (err, db) {
   let collection = db.collection('robots')
   let documents = []
   collection.find({}).toArray(function (err, docs) {
     robots = docs
-    // console.log(robots)
     db.close()
   })
 }
@@ -45,5 +52,17 @@ function getRobots () {
   return robots;
 }
 
-module.exports = { getRobots, getAllRobots, getRobot }
+function addRobot (name, email, university, job, company, skills, phone, avatar, username, password){
+  Robots.create({name: name, university: university, job: job, company: company, skills: skills, phone: phone, avatar: avatar, username: username, password: password}, function (err, Robots){
+    if (err) return handleError(err)
+      console.log(Robots)
+    Robots.save()
+  })
+}
+
+function getRobotByUsername (username){
+  return Robots.findOne({username: username})
+}
+
+module.exports = { getRobots, getAllRobots, getRobot, addRobot, getRobotByUsername }
 
