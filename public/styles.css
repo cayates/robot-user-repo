@@ -4,7 +4,7 @@ body {
     text-align: center;
 }
 .robotProfile {
-    width: 23.5%;
+    /* width: 23.5%; */
     border-style: groove;
     margin: 5px;
 }
@@ -14,9 +14,10 @@ body {
 a {
     width: 100%;
 }
-.robotCards {
-
-}
 .container {
     
+}
+.pic {
+    height: 150px;
+    width: 150px;
 }

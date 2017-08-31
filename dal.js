@@ -54,8 +54,6 @@ function getRobots () {
 
 function addRobot (name, email, university, job, company, skills, phone, avatar, username, password){
   Robots.create({name: name, university: university, job: job, company: company, skills: skills, phone: phone, avatar: avatar, username: username, password: password}, function (err, Robots){
-    if (err) return handleError(err)
-      console.log(Robots)
     Robots.save()
   })
 }

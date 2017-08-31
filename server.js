@@ -39,6 +39,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // all of my routes
 
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+
 app.get('/', function (req, res){ // redirects you instantly to the robots page
     res.redirect('./robots')
 })
@@ -47,10 +50,15 @@ app.get('/robots', function(req, res) { // bringing in the get robot function
     const robots = robotDal.getRobots(req.params.id)    
     res.render('robots', { robots })
 })
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
 app.get('/robotDetail', function (req, res){ // populating the robotDetail page
     res.render('robotDetail')
 })
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
 app.get('/_robot/:id', function (req, res) { // brings in specific robot and renders their specific page
     const chosenRobot = robotDal.getRobot(req.params.id)
@@ -61,18 +69,27 @@ app.get('/_robot/:id', function (req, res) { // brings in specific robot and ren
     }
   })
 
-  app.post('/_robot/:id', function (req, res){
-      res.redirect('./_robot/{{id}}')
-  })
+app.post('/_robot/:id', function (req, res){
+    res.redirect('./_robot/{{id}}')
+})
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
 app.post('/robots', function(req, res){ // post of the form submission throws you back to main robots page
     robotDal.addRobot(req.body.name, req.body.email, req.body.university, req.body.job, req.body.company, req.body.skills, req.body.phone, req.body.avatar, req.body.username, req.body.password);
     res.redirect('./robots')
 })
 
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+
 app.get('/addrobot', function(req, res){ // takes you to the login page 
     res.render('addrobot')
 })
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
 app.get('/login', function (req, res){
     res.render('robots')
@@ -82,8 +99,16 @@ app.post('/login', function (req, res, next){
 
 })
 
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+
+app.get('/editrobot', function (req, res){
+    res.render('editrobot')
+})
+
 app.set('port', 3000); // setting up my port
 
 app.listen(3000, function(){ // console logging to make sure we are running on that port
     console.log('Express started successfully on 3000, bro.');
 })
+

@@ -14,13 +14,10 @@
             <input type="submit" name="" value="Log in to your profile!">            
         </form>  
     <div class = "container">
-        <a href = "http://localhost:3000/_robot/{{id}}">                   
-        <div class="robotCards">         
             {{#robots}}  
-            <a href = "http://localhost:3000/_robot/{{id}}">                                               
+        <a href = "http://localhost:3000/_robot/{{id}}">                                               
             {{>_robot}}
             {{/robots}}
-        </div>
         </a>  
     </div>          
     </body>

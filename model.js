@@ -9,7 +9,7 @@ const robotSchema = new mongoose.Schema({
   company: {type: String},
   skills: {type: String},
   phone: {type: Number},
-  address: {street_num:{type: String}, street_name: {type: Number}, city: {type: String}, state_or_province:{type: String}},
+  // address: {street_num:{type: String}, street_name: {type: Number}, city: {type: String}, state_or_province:{type: String}},
   username: { type: String, required: true },
   password: { type: String, required: true }
 })
