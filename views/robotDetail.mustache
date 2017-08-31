@@ -9,30 +9,24 @@
       <div class = "imageAndName">
         {{>_robot}}
       </div>
-      <div class = "moreRobotInfo">
+      <div class = "addressAndPhone">
         {{address.city}}, {{address.country}}
         {{email}}
         {{phone}}
       </div>
-      <div class = "text1">
+
         {{#university}}
         <h3>Education:<p>{{university}}</p></h3>
         {{/university}}
-      </div>
-      <div class = "robotList">
         <ul>
           <h3>Skills: </h3>
           <li>{{skills}}</li>
         </ul>
-      </div>
 </div>
-      <div>
-        <form class = "deleteRobotForm" action="/robots" method="POST">          
-            <input type="submit" name="_id" value="Delete Robot"> 
-        </form>      
-        <form class = "editRobotForm" action="/editrobot" method = "GET">  
-            <input type="submit" name="_id" value="Edit Robot">   
-        </form> 
+      <div class = "submitForms">
+        <a href = "http://localhost:3000/login">Log in here to edit your profile!</a>     
+        <br>     
+        <a href = "http://localhost:3000/robots">Return to home page</a>          
       </div>
   </body>
 </html>

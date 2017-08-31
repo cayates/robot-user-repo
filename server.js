@@ -9,6 +9,8 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 const robotDal = require('./dal')
 const robots =[];
+const { Strategy: LocalStrategy } = require('passport-local')
+
 // const bcrypt = require('bcryptjs');
 
 // to call authentication later on in my post to log in page
@@ -22,6 +24,14 @@ const robots =[];
 //     console.log(req.isAuthenticated, 'session');
 //     next();
 //   })
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ username: username, password: password }, function (err, user) {
+        done(err, user);
+        });
+    }
+));
 
 // initializing passport and using passport with our session
 
@@ -78,6 +88,7 @@ app.post('/_robot/:id', function (req, res){
 
 app.post('/robots', function(req, res){ // post of the form submission throws you back to main robots page
     robotDal.addRobot(req.body.name, req.body.email, req.body.university, req.body.job, req.body.company, req.body.skills, req.body.phone, req.body.avatar, req.body.username, req.body.password);
+    console.log(req.body.password)
     res.redirect('./robots')
 })
 
@@ -92,11 +103,11 @@ app.get('/addrobot', function(req, res){ // takes you to the login page
 // ---------------------------------------------------------------------------
 
 app.get('/login', function (req, res){
-    res.render('robots')
+    res.render('login')
 })
 
 app.post('/login', function (req, res, next){
-
+    res.redirect('./login/{{id}}')
 })
 
 // ---------------------------------------------------------------------------
@@ -104,6 +115,10 @@ app.post('/login', function (req, res, next){
 
 app.get('/editrobot', function (req, res){
     res.render('editrobot')
+})
+
+app.post('/editrobot', function (req, res){
+    res.redirect('./editrobot')
 })
 
 app.set('port', 3000); // setting up my port
