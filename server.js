@@ -1,3 +1,4 @@
+
 // requiring all of our npm installs to be used in our app
 
 const express = require('express');
@@ -10,6 +11,11 @@ const passport = require('passport')
 const robotDal = require('./dal')
 const robots =[];
 const { Strategy: LocalStrategy } = require('passport-local')
+const { isAuthenticated } = require('./passport.js')
+const Robots = require('./model')
+const { createToken, ensureAuthentication } = require('./helpers.js')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 // const bcrypt = require('bcryptjs');
 
@@ -25,13 +31,13 @@ const { Strategy: LocalStrategy } = require('passport-local')
 //     next();
 //   })
 
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({ username: username, password: password }, function (err, user) {
-        done(err, user);
-        });
-    }
-));
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+//         User.findOne({ username: username, password: password }, function (err, user) {
+//         done(err, user);
+//         });
+//     }
+// ));
 
 // initializing passport and using passport with our session
 
@@ -53,7 +59,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // ---------------------------------------------------------------------------
 
 app.get('/', function (req, res){ // redirects you instantly to the robots page
-    res.redirect('./robots')
+    res.redirect('./login')
 })
 
 app.get('/robots', function(req, res) { // bringing in the get robot function
@@ -102,13 +108,41 @@ app.get('/addrobot', function(req, res){ // takes you to the login page
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 
-app.get('/login', function (req, res){
-    res.render('login')
-})
+// this works, gotta mess with some more stuff
 
-app.post('/login', function (req, res, next){
-    res.redirect('./login/{{id}}')
-})
+// app.get('/login', function (req, res){
+//     res.render('login')
+// })
+
+// app.post('/login', function (req, res, next){
+//     res.redirect('./login/{{id}}')
+// })
+
+// end 
+
+// start testings
+
+app.get('/login', function(req, res){
+    res.render('login')
+  })
+
+app.post('/login', (req, res) => {
+    Robots.findOne({ username: req.body.username }, 'username password', function (err, user, next) {
+      if (err) return next(err)
+      if (!user) {
+        return res.status(401).send({ message: 'Wrong info, try again bro.' })
+      }
+      user.comparePassword(req.body.password, user.password, function ( err, isMatch ) {
+        if (!isMatch) {
+          return res.status(401).send({ message: 'Wrong info, try again bro.' })
+        }
+        let token = { token: createToken(user)};
+        res.redirect('/robots');
+      })
+    })
+  })
+
+// end testings
 
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
@@ -124,6 +158,6 @@ app.post('/editrobot', function (req, res){
 app.set('port', 3000); // setting up my port
 
 app.listen(3000, function(){ // console logging to make sure we are running on that port
-    console.log('Express started successfully on 3000, bro.');
+    console.log('Express started successfully on Andre 3000.');
 })
 

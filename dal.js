@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017/robotdb'
 const Robots = require('./model')
-// mongoose.Promise = require('bluebird')
 const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 let robots = [];
 
 mongoose.connect('mongodb://localhost:27017/robotdb', {
@@ -21,7 +21,7 @@ function getAllDocs (err, db) {
 
 function getRobot (robotId) {
     connectMongodb(url, getAllDocs)
-    for (let i =0; i < robots.length; i++){
+    for (let i = 0; i < robots.length; i++){
       if (robots[i].id == robotId) {
         return robots[i]
       }
@@ -62,5 +62,14 @@ function getRobotByUsername (username){
   return Robots.findOne({username: username})
 }
 
-module.exports = { getRobots, getAllRobots, getRobot, addRobot, getRobotByUsername }
+function editRobot(robotId, updatedRobot){
+  Robots.findOneAndUpdate({'_id': robotId}, updatedRobot, {upsert: true}, function(err, doc) {
+    })
+  }
+
+function logout(logout){
+  logout.destroy();
+}
+
+module.exports = { getRobots, getAllRobots, getRobot, addRobot, getRobotByUsername, logout: logout, editRobot: editRobot }
 

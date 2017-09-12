@@ -5,9 +5,9 @@
   </head>  
   <body>
     <h1>Edit your Profile</h1>
-    <form class = "editRobotForm" action="/robots" method="POST">
-      <input type="text" name="name" placeholder="Name">
-      <input type="text" name="email" placeholder="Email">
+    <form class = "editRobotForm" action="/editrobot/:id" method="POST"> 
+      <input type="text" name="name" placeholder= "Name">
+      <input type="text" name="email" value = "Email">
       <input type="text" name="university" placeholder="University">
       <input type="text" name="job" placeholder="Job">
       <input type="text" name="company" placeholder="Company">
@@ -15,9 +15,6 @@
       <input type="text" name="phone" placeholder="Phone number">
       <input type="text" name="avatar" placeholder="Avatar URL">  
       <input type="text" name="address" placeholder="Address">            
-      <hr>
-      <input type="text" name="username" placeholder="Username">
-      <input type="password" name="password" placeholder="Password">
       <hr>
       <input type="submit" name="" value="Submit your edits to your profile!">
       <hr>
