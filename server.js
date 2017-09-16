@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const session = require('express-session')
 const robotDal = require('./dal')
-const robots =[];
+// const robots =[];
 const { Strategy: LocalStrategy } = require('passport-local')
 const { isAuthenticated } = require('./passport.js')
 const Robots = require('./model')
@@ -99,6 +99,7 @@ app.post('/editrobot/:id', (req, res) => {
     const newRobot = (req.body)
     robotDal.editRobot(id, newRobot)
     res.redirect('/robots')
+    console.log(newRobot)
 })
 
 app.listen(3000, function(){

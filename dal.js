@@ -63,9 +63,18 @@ function getRobotById(robotId){
   return Robots.findOne({'_id':robotId})
 }
 
-function editRobot(id, editedRobot){
-  return Robots.findOneAndUpdate( {'_id': id}, editedRobot)
+function editRobot(id, updatedRobot){
+  return Robots.findOneAndUpdate( {'_id': id}, updatedRobot, {upsert: true}, function(err, doc){
+    console.log("from editRobot dal method")
+  })
 }
+
+// function editPlayer(playerId, updatedPlayer){
+//   Players.findOneAndUpdate({'_id': playerId,}, updatedPlayer, {upsert: true}, function(err, doc) {
+//     console.log(doc, 'from editPlayer dal method')
+
+//   })
+// }
 
 // function editRobot(id, editedRobot){
 //   return Robots.findOneAndUpdate( {'_id': id}, editedRobot), {$set: {name, email: email, university: university, job: job, company: company, skills: skills, phone: phone, avatar: avatar, address: address}}, {upsert: true}
