@@ -58,18 +58,27 @@ function addRobot (name, email, university, job, company, skills, phone, avatar,
   })
 }
 
-function getRobotByUsername (username){
-  return Robots.findOne({username: username})
+function getRobotById(robotId){
+  console.log(robotId)
+  return Robots.findOne({'_id':robotId})
 }
 
-function editRobot(robotId, updatedRobot){
-  Robots.findOneAndUpdate({'_id': robotId}, updatedRobot, {upsert: true}, function(err, doc) {
-    })
-  }
+function editRobot(id, editedRobot){
+  return Robots.findOneAndUpdate( {'_id': id}, editedRobot)
+}
+
+// function editRobot(id, editedRobot){
+//   return Robots.findOneAndUpdate( {'_id': id}, editedRobot), {$set: {name, email: email, university: university, job: job, company: company, skills: skills, phone: phone, avatar: avatar, address: address}}, {upsert: true}
+// }
+
+// function editRobot(robotId, editedRobot){
+//   Robots.findOneAndUpdate({'_id': robotId}, editedRobot, {upsert: true}, function(err, doc) {
+//     })
+//   }
 
 function logout(logout){
   logout.destroy();
 }
 
-module.exports = { getRobots, getAllRobots, getRobot, addRobot, getRobotByUsername, logout: logout, editRobot: editRobot }
+module.exports = { getRobots, getAllRobots, getRobot, addRobot, getRobotById: getRobotById, logout: logout, editRobot: editRobot }
 

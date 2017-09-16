@@ -5,19 +5,21 @@
   </head>  
   <body>
     <h1>Edit your Profile</h1>
-    <form class = "editRobotForm" action="/editrobot/:id" method="POST"> 
-      <input type="text" name="name" placeholder= "Name">
-      <input type="text" name="email" value = "Email">
-      <input type="text" name="university" placeholder="University">
-      <input type="text" name="job" placeholder="Job">
-      <input type="text" name="company" placeholder="Company">
-      <input type="text" name="skills" placeholder="Skills">
-      <input type="text" name="phone" placeholder="Phone number">
-      <input type="text" name="avatar" placeholder="Avatar URL">  
-      <input type="text" name="address" placeholder="Address">            
+    {{#editedRobot}}
+    <form class = "editRobotForm" action="/editrobot/{{id}}" method="POST"> 
+      <input type="text" name="name" value= "{{name}}">
+      <input type="text" name="email" value = "{{email}}">
+      <input type="text" name="university" value="{{university}}">
+      <input type="text" name="job" value="{{job}}">
+      <input type="text" name="company" value="{{company}}">
+      <input type="text" name="skills" value="{{skills}}">
+      <input type="text" name="phone" value="{{phone}}">
+      <input type="text" name="avatar" value="{{avatar}}">  
+      <input type="text" name="address" value="{{address}}">  
       <hr>
       <input type="submit" name="" value="Submit your edits to your profile!">
       <hr>
+      {{/editedRobot}}      
       <a href = "http://localhost:3000/robots">Return to home page</a>
     </form>
   </body>
