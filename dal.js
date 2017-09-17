@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 let robots = [];
 
-mongoose.connect('mongodb://localhost:27017/robotdb', {
+mongoose.connect(url, {
   useMongoClient: true
 })
 
@@ -69,25 +69,9 @@ function editRobot(id, updatedRobot){
   })
 }
 
-// function editPlayer(playerId, updatedPlayer){
-//   Players.findOneAndUpdate({'_id': playerId,}, updatedPlayer, {upsert: true}, function(err, doc) {
-//     console.log(doc, 'from editPlayer dal method')
-
-//   })
-// }
-
-// function editRobot(id, editedRobot){
-//   return Robots.findOneAndUpdate( {'_id': id}, editedRobot), {$set: {name, email: email, university: university, job: job, company: company, skills: skills, phone: phone, avatar: avatar, address: address}}, {upsert: true}
-// }
-
-// function editRobot(robotId, editedRobot){
-//   Robots.findOneAndUpdate({'_id': robotId}, editedRobot, {upsert: true}, function(err, doc) {
-//     })
-//   }
-
 function logout(logout){
   logout.destroy();
 }
 
-module.exports = { getRobots, getAllRobots, getRobot, addRobot, getRobotById: getRobotById, logout: logout, editRobot: editRobot }
+module.exports = { getRobots: getRobots, getAllRobots: getAllRobots, getRobot: getRobot, addRobot: addRobot, getRobotById: getRobotById, logout: logout, editRobot: editRobot }
 

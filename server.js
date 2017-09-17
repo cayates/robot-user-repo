@@ -34,12 +34,8 @@ app.get('/robotDetail', function (req, res){
 
 app.get('/_robot/:id', function (req, res) { 
     const chosenRobot = robotDal.getRobot(req.params.id)
-    if (chosenRobot) {
       res.render('robotDetail', chosenRobot)
-    } else {
-      res.send('Please refresh the page to get your robot, bro.')
-    }
-  })
+})
 
 app.post('/_robot/:id', function (req, res){
     res.redirect('./_robot/{{id}}')
@@ -63,11 +59,11 @@ app.post('/login', (req, res) => {
     Robots.findOne({ username: req.body.username }, 'username password', function (err, user, next) {
       if (err) return next(err)
       if (!user) {
-        return res.status(401).send({ message: 'Wrong info, try again bro.' })
+        return res.redirect("./login")
       }
       user.comparePassword(req.body.password, user.password, function ( err, isMatch ) {
         if (!isMatch) {
-          return res.status(401).send({ message: 'Wrong info, try again bro.' })
+          return res.redirect("./login")
         }
         let token = { token: createToken(user)};
         res.redirect('/robots');
@@ -79,20 +75,6 @@ app.get('/editrobot/:id', function (req, res){
     const editedRobot = robotDal.getRobot(req.params.id)
     res.render('editrobot', {editedRobot})
 })
-
-// updated and testing
-
-// app.post('/editrobot/:id', (req, res) => {
-//     const id = req.params.id;
-//     const newRobot = req.body;
-//     robotDal.editRobot(id, newRobot).then(function(robot){
-//     res.redirect('/robots')        
-//     })
-// })
-
-// end updated and testing
-
-// original
 
 app.post('/editrobot/:id', (req, res) => {
     const id = req.params.id
